@@ -1,5 +1,8 @@
 body {
   background-color: #FFF0F5;
+  background-image: url('https://i.imgur.com/kKd6Uxf.png');
+  background-size: cover;
+  background-attachment: fixed;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 20px;
@@ -14,40 +17,57 @@ header {
 h1 {
   font-size: 2em;
   color: #D81B60;
-}
-
-h2 {
-  color: #6A1B9A;
   margin-bottom: 10px;
 }
 
+.grid-anios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
 .anio {
-  margin-bottom: 40px;
+  flex: 1 1 220px;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  min-width: 220px;
+  border: 2px dashed #E91E63;
+}
+
+.anio h2 {
+  text-align: center;
+  color: #6A1B9A;
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }
 
 .materias-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .materia {
   background-color: #F8BBD0;
   color: #000;
   border-radius: 12px;
-  padding: 14px;
-  min-width: 180px;
+  padding: 10px;
   text-align: center;
   font-weight: bold;
   cursor: not-allowed;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 2px solid #F8BBD0;
+  box-shadow: 0 0 8px rgba(248, 187, 208, 0.5);
 }
 
 .materia.habilitada {
   background-color: #E91E63;
   color: #fff;
   cursor: pointer;
+  animation: florecer 0.4s ease-in;
 }
 
 .materia.aprobada {
@@ -57,11 +77,15 @@ h2 {
   cursor: default;
 }
 
-#mensaje {
-  margin-top: 20px;
-  font-size: 16px;
-  color: #880E4F;
+@keyframes florecer {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
+
+.materia.habilitada:hover {
+  transform: scale(1.05);
+}
+
 #barra-progreso-container {
   margin: 20px auto 30px;
   text-align: center;
@@ -71,16 +95,6 @@ h2 {
   width: 60%;
   height: 20px;
   border-radius: 10px;
-  overflow: hidden;
-  background-color: #F8BBD0;
-}
-
-#barra-progreso::-webkit-progress-bar {
-  background-color: #F8BBD0;
-}
-
-#barra-progreso::-webkit-progress-value {
-  background-color: #CE93D8;
 }
 
 #porcentaje {
@@ -88,4 +102,11 @@ h2 {
   margin-top: 5px;
   font-weight: bold;
   color: #6A1B9A;
-  }
+}
+
+#mensaje {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #880E4F;
+}
