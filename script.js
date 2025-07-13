@@ -1,30 +1,30 @@
 const materiasPorAnio = {
   anio1: [
-    { nombre: "Biología celular y genética", habilita: ["Microbiología y parasitología", "Fisiología Humana", "Enfermedades infecciosas"] },
-    { nombre: "Ciencias sociales y obstetricia", habilita: ["Salud pública"] },
+    { nombre: "Biología celular y genética" },
+    { nombre: "Ciencias sociales y obstetricia" },
     { nombre: "Psicología" },
-    { nombre: "Anatomia, Histologia y Embriologia", habilita: ["Fisiología Humana"] },
-    { nombre: "Obstetricia Normal", habilita: ["Clinica obstetrica normal y patológica", "Obstetricia patologica", "Neonatología normal y patológica"] }
+    { nombre: "Anatomia, Histologia y Embriologia" },
+    { nombre: "Obstetricia Normal" }
   ],
   anio2: [
-    { nombre: "Epidemiología", habilita: ["Enfermedades infecciosas", "Salud pública"] },
+    { nombre: "Epidemiología" },
     { nombre: "Educación para la salud reproductiva" },
     { nombre: "La salud materno infantil" },
-    { nombre: "Farmacología general", habilita: ["Terapéutica bases farmacológicas", "Enfermedades infecciosas"] },
-    { nombre: "Microbiologia y parasitologia", habilita: ["Enfermedades infecciosas"] },
-    { nombre: "Obstetricia patologica", habilita: ["Neonatología normal y patológica", "Clínica obstétrica normal y patológica"] },
+    { nombre: "Farmacología general" },
+    { nombre: "Microbiologia y parasitologia" },
+    { nombre: "Obstetricia patologica" },
     { nombre: "Fisiología humana" }
   ],
   anio3: [
-    { nombre: "Investigación en salud", habilita: ["Tesina"] },
+    { nombre: "Investigación en salud" },
     { nombre: "Salud pública" },
-    { nombre: "Terapéutica bases farmacológicas", habilita: ["Enfermedades infecciosas"] },
+    { nombre: "Terapéutica bases farmacológicas" },
     { nombre: "Clinica obstetrica normal y patológica" },
     { nombre: "Neonatología normal y patológica" }
   ],
   anio4: [
-    { nombre: "Inglés técnico", habilita: ["Tesina"] },
-    { nombre: "Informática aplicada a las ciencias de la salud", habilita: ["Tesina"] },
+    { nombre: "Inglés técnico" },
+    { nombre: "Informática aplicada a las ciencias de la salud" },
     { nombre: "Enfermedades infecciosas" },
     { nombre: "Ética, deontología y obstetricia" },
     { nombre: "PFO" },
@@ -42,12 +42,8 @@ Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
   materias.forEach((materia) => {
     const btn = document.createElement("div");
     btn.textContent = materia.nombre;
-    btn.className = "materia";
+    btn.className = "materia habilitada"; // Todas habilitadas desde el inicio
     estado[materia.nombre] = false;
-
-    if (!materia.habilita || materia.habilita.length === 0) {
-      btn.classList.add("habilitada");
-    }
 
     btn.onclick = () => {
       if (btn.classList.contains("habilitada")) {
@@ -57,20 +53,7 @@ Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
         btn.textContent = `✓ ${materia.nombre}`;
         mensaje.textContent = `Aprobaste: ${materia.nombre}`;
 
-        Object.values(materiasPorAnio).flat().forEach((m) => {
-          if (m.habilita && m.habilita.includes(materia.nombre)) {
-            const todasAprobadas = m.habilita.every(dep => estado[dep]);
-            if (todasAprobadas) {
-              const botones = document.querySelectorAll(".materia");
-              botones.forEach(b => {
-                if (b.textContent === m.nombre) {
-                  b.classList.add("habilitada");
-                }
-              });
-            }
-          }
-        });
-
+        // 📊 Actualizar progreso
         const total = Object.keys(estado).length;
         const completadas = Object.values(estado).filter(v => v).length;
         const progreso = Math.round((completadas / total) * 100);
