@@ -34,6 +34,8 @@ const materiasPorAnio = {
 
 const estado = {};
 const mensaje = document.getElementById("mensaje");
+const barra = document.getElementById("barra-progreso");
+const porcentaje = document.getElementById("porcentaje");
 
 Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
   const contenedor = document.querySelector(`#${anioId} .materias-container`);
@@ -43,7 +45,6 @@ Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
     btn.className = "materia";
     estado[materia.nombre] = false;
 
-    // Habilitar si no depende de nada
     if (!materia.abre) btn.classList.add("habilitada");
 
     btn.onclick = () => {
@@ -54,26 +55,27 @@ Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
         btn.textContent = `✓ ${materia.nombre}`;
         mensaje.textContent = `Aprobaste: ${materia.nombre}`;
 
-        // Habilitar materias correlativas
         Object.values(materiasPorAnio).flat().forEach((m) => {
           if (m.abre && m.abre.includes(materia.nombre)) {
             const todasAprobadas = m.abre.every(dep => estado[dep]);
             if (todasAprobadas) {
               const botones = document.querySelectorAll(".materia");
               botones.forEach(b => {
-                if (b.textContent === m.nombre) b.classList.add("habilitada");
+                if (b.textContent === m.nombre) {
+                  b.classList.add("habilitada");
+                }
               });
             }
           }
         });
+
+        const total = Object.keys(estado).length;
+        const completadas = Object.values(estado).filter(v => v).length;
+        const progreso = Math.round((completadas / total) * 100);
+        barra.value = progreso;
+        porcentaje.textContent = `${progreso}%`;
       }
     };
     contenedor.appendChild(btn);
   });
 });
-const total = Object.keys(estado).length;
-const completadas = Object.values(estado).filter(v => v).length;
-const progreso = Math.round((completadas / total) * 100);
-
-document.getElementById("barra-progreso").value = progreso;
-document.getElementById("porcentaje").textContent = `${progreso}%`;
