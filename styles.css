@@ -1,20 +1,47 @@
 body {
   background-color: #FFF0F5;
   font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 2em;
+  color: #D81B60;
+}
+
+h2 {
+  color: #6A1B9A;
+  margin-bottom: 10px;
+}
+
+.anio {
+  margin-bottom: 40px;
+}
+
+.materias-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .materia {
   background-color: #F8BBD0;
-  border: none;
-  padding: 12px;
-  margin: 8px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
   color: #000;
+  border-radius: 12px;
+  padding: 14px;
+  min-width: 180px;
+  text-align: center;
+  font-weight: bold;
   cursor: not-allowed;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .materia.habilitada {
@@ -34,5 +61,31 @@ body {
   margin-top: 20px;
   font-size: 16px;
   color: #880E4F;
-  font-weight: 500;
 }
+#barra-progreso-container {
+  margin: 20px auto 30px;
+  text-align: center;
+}
+
+#barra-progreso {
+  width: 60%;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #F8BBD0;
+}
+
+#barra-progreso::-webkit-progress-bar {
+  background-color: #F8BBD0;
+}
+
+#barra-progreso::-webkit-progress-value {
+  background-color: #CE93D8;
+}
+
+#porcentaje {
+  display: block;
+  margin-top: 5px;
+  font-weight: bold;
+  color: #6A1B9A;
+  }
