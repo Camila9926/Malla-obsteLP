@@ -2,41 +2,41 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Malla Obstetricia Interactiva</title>
+  <title>Licenciatura en Obstetricia</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <h1>🌷 Malla Interactiva de Obstetricia</h1>
-    <p>Seguí tu recorrido académico con estilo 💜</p>
+    <p>Organizá tu recorrido académico con estilo, color y florecimiento ✨</p>
   </header>
 
-  <section class="anio" id="anio1">
-    <h2>📘 Primer Año</h2>
-    <div class="materias-container"></div>
-  </section>
+  <div id="barra-progreso-container">
+    <label for="barra-progreso">Progreso:</label>
+    <progress id="barra-progreso" value="0" max="100"></progress>
+    <span id="porcentaje">0%</span>
+  </div>
 
-  <section class="anio" id="anio2">
-    <h2>📗 Segundo Año</h2>
-    <div class="materias-container"></div>
-  </section>
-
-  <section class="anio" id="anio3">
-    <h2>📙 Tercer Año</h2>
-    <div class="materias-container"></div>
-  </section>
-
-  <section class="anio" id="anio4">
-    <h2>📕 Cuarto Año</h2>
-    <div class="materias-container"></div>
-  </section>
+  <div class="grid-anios">
+    <section class="anio" id="anio1">
+      <h2>🌸 Primer Año</h2>
+      <div class="materias-container"></div>
+    </section>
+    <section class="anio" id="anio2">
+      <h2>🌼 Segundo Año</h2>
+      <div class="materias-container"></div>
+    </section>
+    <section class="anio" id="anio3">
+      <h2>🌺 Tercer Año</h2>
+      <div class="materias-container"></div>
+    </section>
+    <section class="anio" id="anio4">
+      <h2>🌻 Cuarto Año</h2>
+      <div class="materias-container"></div>
+    </section>
+  </div>
 
   <div id="mensaje"></div>
   <script src="script.js"></script>
 </body>
 </html>
-<div id="barra-progreso-container">
-  <label for="barra-progreso">Progreso:</label>
-  <progress id="barra-progreso" value="0" max="100"></progress>
-  <span id="porcentaje">0%</span>
-</div>
