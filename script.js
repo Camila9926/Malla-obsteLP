@@ -1,30 +1,30 @@
 const materiasPorAnio = {
   anio1: [
-    { nombre: "Biología celular y genética", abre: ["Microbiología y parasitología", "Fisiología Humana", "Enfermedades infecciosas"] },
-    { nombre: "Ciencias sociales y obstetricia", abre: ["Salud pública"] },
+    { nombre: "Biología celular y genética", habilita: ["Microbiología y parasitología", "Fisiología Humana", "Enfermedades infecciosas"] },
+    { nombre: "Ciencias sociales y obstetricia", habilita: ["Salud pública"] },
     { nombre: "Psicología" },
-    { nombre: "Anatomia, Histologia y Embriologia", abre: ["Fisiología Humana"] },
-    { nombre: "Obstetricia Normal", abre: ["Clinica obstetrica normal y patológica", "Obstetricia patologica", "Neonatología normal y patológica"] }
+    { nombre: "Anatomia, Histologia y Embriologia", habilita: ["Fisiología Humana"] },
+    { nombre: "Obstetricia Normal", habilita: ["Clinica obstetrica normal y patológica", "Obstetricia patologica", "Neonatología normal y patológica"] }
   ],
   anio2: [
-    { nombre: "Epidemiología", abre: ["Enfermedades infecciosas", "Salud pública"] },
+    { nombre: "Epidemiología", habilita: ["Enfermedades infecciosas", "Salud pública"] },
     { nombre: "Educación para la salud reproductiva" },
     { nombre: "La salud materno infantil" },
-    { nombre: "Farmacología general", abre: ["Terapéutica bases farmacológicas", "Enfermedades infecciosas"] },
-    { nombre: "Microbiologia y parasitologia", abre: ["Enfermedades infecciosas"] },
-    { nombre: "Obstetricia patologica", abre: ["Neonatología normal y patológica", "Clínica obstétrica normal y patológica"] },
+    { nombre: "Farmacología general", habilita: ["Terapéutica bases farmacológicas", "Enfermedades infecciosas"] },
+    { nombre: "Microbiologia y parasitologia", habilita: ["Enfermedades infecciosas"] },
+    { nombre: "Obstetricia patologica", habilita: ["Neonatología normal y patológica", "Clínica obstétrica normal y patológica"] },
     { nombre: "Fisiología humana" }
   ],
   anio3: [
-    { nombre: "Investigación en salud", abre: ["Tesina"] },
+    { nombre: "Investigación en salud", habilita: ["Tesina"] },
     { nombre: "Salud pública" },
-    { nombre: "Terapéutica bases farmacológicas", abre: ["Enfermedades infecciosas"] },
+    { nombre: "Terapéutica bases farmacológicas", habilita: ["Enfermedades infecciosas"] },
     { nombre: "Clinica obstetrica normal y patológica" },
     { nombre: "Neonatología normal y patológica" }
   ],
   anio4: [
-    { nombre: "Inglés técnico", abre: ["Tesina"] },
-    { nombre: "Informática aplicada a las ciencias de la salud", abre: ["Tesina"] },
+    { nombre: "Inglés técnico", habilita: ["Tesina"] },
+    { nombre: "Informática aplicada a las ciencias de la salud", habilita: ["Tesina"] },
     { nombre: "Enfermedades infecciosas" },
     { nombre: "Ética, deontología y obstetricia" },
     { nombre: "PFO" },
@@ -39,13 +39,15 @@ const porcentaje = document.getElementById("porcentaje");
 
 Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
   const contenedor = document.querySelector(`#${anioId} .materias-container`);
-  materias.forEach((materia, i) => {
+  materias.forEach((materia) => {
     const btn = document.createElement("div");
     btn.textContent = materia.nombre;
     btn.className = "materia";
     estado[materia.nombre] = false;
 
-    if (!materia.abre) btn.classList.add("habilitada");
+    if (!materia.habilita || materia.habilita.length === 0) {
+      btn.classList.add("habilitada");
+    }
 
     btn.onclick = () => {
       if (btn.classList.contains("habilitada")) {
@@ -56,8 +58,8 @@ Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
         mensaje.textContent = `Aprobaste: ${materia.nombre}`;
 
         Object.values(materiasPorAnio).flat().forEach((m) => {
-          if (m.abre && m.abre.includes(materia.nombre)) {
-            const todasAprobadas = m.abre.every(dep => estado[dep]);
+          if (m.habilita && m.habilita.includes(materia.nombre)) {
+            const todasAprobadas = m.habilita.every(dep => estado[dep]);
             if (todasAprobadas) {
               const botones = document.querySelectorAll(".materia");
               botones.forEach(b => {
@@ -76,6 +78,7 @@ Object.entries(materiasPorAnio).forEach(([anioId, materias]) => {
         porcentaje.textContent = `${progreso}%`;
       }
     };
+
     contenedor.appendChild(btn);
   });
 });
